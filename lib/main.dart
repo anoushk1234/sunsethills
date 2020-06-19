@@ -12,7 +12,7 @@ void main() => runApp(MaterialApp(
     //'buildingchart':(context)  =>BuildingChart()
     'chart':(context) => ChartPage()
   },
-  theme: ThemeData(),
+  theme: ThemeData.light(),
   darkTheme: ThemeData.dark(),
 ));
 
