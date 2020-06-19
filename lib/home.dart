@@ -15,6 +15,7 @@ class _HomeState extends State<Home> {
   List<int> heights = [];
   int _currentindex = 0;
   List<Building> society = [];
+  List<int> sorted = [];
 
 //List <int> sunnybuildings=[];
   //final TextEditingController _quantitiy = TextEditingController();
@@ -69,71 +70,69 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           Positioned.fill(
             child: Align(
-                alignment: Alignment.topLeft,
-                child:Container(
-                  width: 20, height: 20, //color: Colors.deepOrange,
-                  decoration: BoxDecoration(
-                      color: Colors.deepOrange,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(1, 2))
-                      ]),
+              alignment: Alignment.topLeft,
+              child: Container(
+                width: 20, height: 20, //color: Colors.deepOrange,
+                decoration: BoxDecoration(
+                    color: Colors.deepOrange,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black12,
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: Offset(1, 2))
+                    ]),
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 40),
+                child: Text(
+                  "Sunset viewable  ",
+                  style: TextStyle(
+                      fontFamily: "MuseoModerno",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
+              ),
             ),
           ),
           Positioned.fill(
             child: Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                    padding: EdgeInsets.only(bottom: 40),
-                    child: Text(
-                      "Sunset viewable  ",
-                      style: TextStyle(
-                          fontFamily: "MuseoModerno",
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                width: 20, height: 20, //color: Colors.deepOrange,
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black12,
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: Offset(1, 2))
+                    ]),
+              ),
             ),
           ),
           Positioned.fill(
             child: Align(
-                alignment: Alignment.bottomLeft,
-                child:  Container(
-                      width: 20, height: 20, //color: Colors.deepOrange,
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black12,
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: Offset(1, 2))
-                          ]),
-                    ),
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 1),
+                child: Text(
+                  "Other buildings     ",
+                  style: TextStyle(
+                      fontFamily: "MuseoModerno",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
-          ),
-          Positioned.fill(
-            child: Align(
-                alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 1),
-                    child: Text(
-                      "Other buildings     ",
-                      style: TextStyle(
-                          fontFamily: "MuseoModerno",
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                )
-            ,
           ),
         ],
       ),
@@ -310,42 +309,8 @@ class _HomeState extends State<Home> {
                                       int.parse(n.substring(k + 1, i + 1)));
                                 }
                               }
-                              /* for (int i = 0; i <= (buildings * 2) - 1; i++) {
-                                if (n.substring(i, i + 1) != ",") {
-                                  tempstr=tempstr+n.substring(i,i+1);
-                                }
-                                else if(n.substring(i, i + 1) == ","){
-                                  heights.add(int.parse(tempstr));tempstr='';
-                                }
-                                else if(i==(buildings*2)-1){
-                                  heights.add(int.parse(tempstr);)
-                                }*/
-                              /*if (i != (buildings * 2) - 1) {
-                                  if (n.substring(i, i + 1) != ",") {
-                                    heights
-                                        .add(int.parse(n.substring(i, i + 1)));*/
-                              /* print("Extracted string at" +
-                                        i.toString() +
-                                        " pos: " +
-                                        n.substring(i, i + 1));*/
-                              /*print(
-                                        heights.toString() + " at " +
-                                            i.toString());*/
-                              /* }
-                                } else {
-                                  heights.add(int.parse(n.substring(i)));
-                                  */ /* print("Extracted string at " +
-                                      i.toString() +
-                                      " pos: " +
-                                      n.substring(i));
-                                  print(heights.toString() + " at " +
-                                      i.toString());*/ /*
-                                }*/
-                              //}
                             });
-
                           },
-
                         ),
                       ),
                       Row(
@@ -402,11 +367,29 @@ class _HomeState extends State<Home> {
                                       }
                                     }
                                   });
+                                  int temp2 = 0;//print(sorted.toString()+"outside")
+                                  sorted.clear();
+                                  for(var i=0;i<buildings;i++){
+                                    sorted.add(heights[i]);
+                                   // print(sorted.toString()+"inside");
+                                  }
+                                  for(var i=0;i<buildings-1;i++){
+                                    for(var j=0;j<buildings-1;j++){
+                                      if(sorted[j]>sorted[j+1]){
+                                        temp2=sorted[j];
+                                        sorted[j]=sorted[j+1];
+                                        sorted[j+1]=temp2;
+
+                                      }
+                                    }
+                                  }
+                                  print(sorted);
 
                                   var route = new MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         new ChartPage(soceity2: society),
                                   );
+
                                   Navigator.of(context).push(route);
                                   showAlertDialog(context);
                                 },
@@ -434,7 +417,7 @@ class _HomeState extends State<Home> {
                   //height: 400,
                   //color: Color.fromRGBO(83, 224, 188, 1),
                   margin: EdgeInsets.all(10),
-                  child: getData(sunnybuildings)),
+                  child: getData(sunnybuildings,sorted)),
             ],
           ),
         ),
@@ -442,7 +425,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-Widget getData(value) {
+Widget getData(value,List <int>sorted) {
   bool canShow = false;
   int _value = value;
   if (_value != 0) {
@@ -466,6 +449,25 @@ Widget getData(value) {
               Container(
                   child: Text(
                 "$_value",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 50.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "MuseoModerno"),
+                textAlign: TextAlign.center,
+              )),
+              Text(
+                "Ideal Order for most buildings to see the sunset",
+                style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "MuseoModerno"),
+                textAlign: TextAlign.center,
+              ),
+              Container(
+                  child: Text(
+                "$sorted",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 50.0,

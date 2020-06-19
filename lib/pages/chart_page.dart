@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sunsethills/building_chart.dart';
 import 'package:sunsethills/buildings.dart';
 
+
 class ChartPage extends StatelessWidget {
   final List<Building> soceity2;
 
